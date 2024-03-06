@@ -1,29 +1,29 @@
-package fronteira;
+package boundary;
 
 import java.util.Scanner;
 
-import controle.GerenciarUsuario;
+import controller.UserManager;
 
-public class PaginaInicial {
+public class StartUpPage {
 
     public void menu() {
 
-        GerenciarUsuario User = new GerenciarUsuario();
+        UserManager User = new UserManager();
 
-        int opcao;
+        int option;
         while (true) {
             System.out.println("Selecione a opção que deseja ");
             System.out.println("[1] - Cadastrar Usuário");
             System.out.println("[2] - Listar Usuário ");
 
-            Scanner entrada = new Scanner(System.in);
-            opcao = entrada.nextInt();
-            switch (opcao) {
+            Scanner input = new Scanner(System.in);
+            option = input.nextInt();
+            switch (option) {
                 case 1:
-                    User.cadastrarUsuario();
+                    User.registerUser();
                     break;
                 case 2:
-                    User.listaUsuarios();
+                    User.listUsers();
                     break;
                 default:
                     break;
