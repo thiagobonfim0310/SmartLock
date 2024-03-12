@@ -1,13 +1,13 @@
 
 import java.util.Scanner;
 
-import controle.GerenciarUsuario;
-import fronteira.PaginaInicial;
+import controller.UserManager;
+import boundary.StartUpPage;
 
 public class main {
 
     public static void main(String[] args) {
-        PaginaInicial menu = new PaginaInicial();
+        StartUpPage menu = new StartUpPage();
         menu.menu();
     }
 }
