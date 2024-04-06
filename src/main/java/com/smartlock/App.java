@@ -1,11 +1,12 @@
+package com.smartlock;
 
-import java.util.Scanner;
+import com.smartlock.View.StartUpPage;
 
-import controller.UserManager;
-import boundary.StartUpPage;
-
-public class main {
-
+/**
+ * Hello world!
+ *
+ */
+public class App {
     public static void main(String[] args) {
         StartUpPage menu = new StartUpPage();
         menu.menu();

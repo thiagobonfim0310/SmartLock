@@ -1,4 +1,4 @@
-package entities;
+package com.smartlock.Business.entities;
 
 public class User {
 

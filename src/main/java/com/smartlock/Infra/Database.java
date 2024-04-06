@@ -1,8 +1,9 @@
-package boundary;
+package com.smartlock.Infra;
 
 import java.util.ArrayList;
 import java.util.List;
-import entities.User;
+
+import com.smartlock.Business.entities.User;
 
 public class Database {
     List<User> usuarios = new ArrayList<>();

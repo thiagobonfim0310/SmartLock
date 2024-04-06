@@ -1,6 +1,4 @@
-package entities;
-
-import entities.Address;
+package com.smartlock.Business.entities;
 
 public class Administrator extends User {
 

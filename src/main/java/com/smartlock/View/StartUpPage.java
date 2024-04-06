@@ -1,8 +1,8 @@
-package boundary;
+package com.smartlock.View;
 
 import java.util.Scanner;
 
-import controller.UserManager;
+import com.smartlock.Business.User.UserManager;
 
 public class StartUpPage {
 

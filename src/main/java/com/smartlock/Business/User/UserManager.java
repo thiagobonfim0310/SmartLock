@@ -1,13 +1,13 @@
-package controller;
+package com.smartlock.Business.User;
 
 import java.util.List;
 import java.util.Scanner;
 
-import entities.Administrator;
-import entities.Cashier;
-import entities.Address;
-import entities.User;
-import boundary.Database;
+import com.smartlock.Business.entities.Address;
+import com.smartlock.Business.entities.Administrator;
+import com.smartlock.Business.entities.Cashier;
+import com.smartlock.Business.entities.User;
+import com.smartlock.Infra.Database;
 
 public class UserManager {
     Database data = new Database();
