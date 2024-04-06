@@ -1,14 +1,13 @@
-package boundary;
+package com.smartlock.View;
 
 import java.util.Scanner;
 
-import controller.UserManager;
+import com.smartlock.Business.User.UserManager;
+import com.smartlock.View.User.RegisterPage;
 
 public class StartUpPage {
 
     public void menu() {
-
-        UserManager User = new UserManager();
 
         int option;
         while (true) {
@@ -20,10 +19,10 @@ public class StartUpPage {
             option = input.nextInt();
             switch (option) {
                 case 1:
-                    User.registerUser();
+                    RegisterPage.registerUser();
                     break;
                 case 2:
-                    User.listUsers();
+
                     break;
                 default:
                     break;
