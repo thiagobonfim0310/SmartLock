@@ -1,8 +1,8 @@
-# Sistema de Gestão Empresarial
+# Sistema de Trancas e Gestão de Acesso
 
 ## Sobre o sistema
 
-Este software consiste em um sistema utilizado para o gerenciamento de recursos de um supermercado.
+Este software consiste em um sistema utilizado para o gerenciamento de acesso à ambientes.
 
 ## Padrão de estilo
 
