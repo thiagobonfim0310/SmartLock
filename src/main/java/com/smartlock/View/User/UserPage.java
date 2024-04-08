@@ -1,12 +1,22 @@
 package com.smartlock.View.User;
 
 import java.util.Scanner;
+import java.util.List;
 
 import com.smartlock.Business.User.UserManager;
 import com.smartlock.Business.entities.User;
+import com.smartlock.View.util.PrintEntities;
 
-public class RegisterPage {
-    public static void registerUser() {
+public class UserPage {
+
+    UserManager managerUser;
+    PrintEntities print = new PrintEntities();
+
+    public UserPage(UserManager userManager) {
+        managerUser = userManager;
+    }
+
+    public void registerUserPage() {
         User user = new User();
         Scanner input = new Scanner(System.in);
 
@@ -21,9 +31,19 @@ public class RegisterPage {
         System.out.print("Número: \n");
         user.setNumber(input.nextLine());
         // TO-DO : Adicionar o cadastro de tipo
-        UserManager.registerUserController(user);
+        managerUser.registerUserController(user);
         System.out.print("------------------Cadastro Finalizado------------------ \n");
 
+    }
+
+    public void listUserPage() {
+        List<User> users = managerUser.listUserController();
+
+        for (User user : users) {
+            System.out.print("------------------------------------ \n");
+            print.printClass(user);
+            System.out.print("\n");
+        }
     }
 
 }
