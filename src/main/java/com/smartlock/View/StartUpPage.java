@@ -3,9 +3,14 @@ package com.smartlock.View;
 import java.util.Scanner;
 
 import com.smartlock.Business.User.UserManager;
-import com.smartlock.View.User.RegisterPage;
+import com.smartlock.View.User.UserPage;
 
 public class StartUpPage {
+    UserPage userPage;
+
+    public StartUpPage(UserPage user) {
+        userPage = user;
+    }
 
     public void menu() {
 
@@ -19,10 +24,10 @@ public class StartUpPage {
             option = input.nextInt();
             switch (option) {
                 case 1:
-                    RegisterPage.registerUser();
+                    this.userPage.registerUserPage();
                     break;
                 case 2:
-
+                    this.userPage.listUserPage();
                     break;
                 default:
                     break;
