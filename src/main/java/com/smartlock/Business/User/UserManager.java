@@ -1,14 +1,33 @@
 package com.smartlock.Business.User;
 
+import com.smartlock.Business.exceptions.EmailNotFoundException;
+import com.smartlock.Business.validators.ValidateUser;
 import com.smartlock.Business.entities.User;
 import com.smartlock.Infra.Database;
+import java.util.List;
+import java.util.ArrayList;
 
 public class UserManager {
-    static Database data = new Database();
 
-    public static void registerUserController(User usuario) {
+    Database data;
 
-        data.saveUser(usuario);
+    public UserManager(Database database) {
+        data = database;
+    }
+
+    public void registerUserController(User usuario) throws EmailNotFoundException {
+
+            if(!ValidateUser.validateEmail(usuario.getEmail())){
+                throw new EmailNotFoundException();
+            }
+            data.saveUser(usuario);
+    }
+
+    public List<User> listUserController() {
+        List<User> users = new ArrayList();
+
+        users = data.getUsers();
+        return users;
     }
 
 }

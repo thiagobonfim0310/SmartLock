@@ -1,6 +1,9 @@
 package com.smartlock;
 
+import com.smartlock.Business.User.UserManager;
+import com.smartlock.Infra.Database;
 import com.smartlock.View.StartUpPage;
+import com.smartlock.View.User.UserPage;
 
 /**
  * Hello world!
@@ -8,7 +11,11 @@ import com.smartlock.View.StartUpPage;
  */
 public class App {
     public static void main(String[] args) {
-        StartUpPage menu = new StartUpPage();
+        Database database = new Database();
+        UserManager userManager = new UserManager(database);
+        UserPage userPage = new UserPage(userManager);
+        StartUpPage menu = new StartUpPage(userPage);
+
         menu.menu();
     }
 }
