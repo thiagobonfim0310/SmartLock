@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.smartlock.Business.User.UserManager;
 import com.smartlock.Business.entities.User;
+import com.smartlock.Business.exceptions.EmailNotFoundException;
 import com.smartlock.View.util.PrintEntities;
 
 public class UserPage {
@@ -31,7 +32,11 @@ public class UserPage {
         System.out.print("Número: \n");
         user.setNumber(input.nextLine());
         // TO-DO : Adicionar o cadastro de tipo
-        managerUser.registerUserController(user);
+        try {
+            managerUser.registerUserController(user);
+        } catch (EmailNotFoundException e) {
+            System.out.println("Email inválido");
+        }
         System.out.print("------------------Cadastro Finalizado------------------ \n");
 
     }
