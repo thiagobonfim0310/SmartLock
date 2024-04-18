@@ -29,8 +29,6 @@ public class UserPage {
         user.setEmail(input.nextLine());
         System.out.print("Cpf: \n");
         user.setCpf(input.nextLine());
-        System.out.print("Número: \n");
-        user.setNumber(input.nextLine());
         // TO-DO : Adicionar o cadastro de tipo
         try {
             managerUser.registerUserController(user);
@@ -48,6 +46,20 @@ public class UserPage {
             System.out.print("------------------------------------ \n");
             print.printClass(user);
             System.out.print("\n");
+        }
+    }
+
+    public void updateUserPage() {
+        List<User> users = managerUser.listUserController();
+
+        int indice = 0;
+
+        System.out.println("Digite o indice do User que dejesa atualizar");
+        for (User user : users) {
+            System.out.println("-------------User " + indice + "-----------------");
+            print.printClass(user);
+            System.out.print("\n");
+            indice++;
         }
     }
 
