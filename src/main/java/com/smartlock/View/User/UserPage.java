@@ -1,6 +1,7 @@
 package com.smartlock.View.User;
 
 import java.util.Scanner;
+import java.util.UUID;
 import java.util.List;
 
 import com.smartlock.Business.User.UserManager;
@@ -50,17 +51,53 @@ public class UserPage {
     }
 
     public void updateUserPage() {
+        Scanner input = new Scanner(System.in);
         List<User> users = managerUser.listUserController();
 
         int indice = 0;
 
         System.out.println("Digite o indice do User que dejesa atualizar");
         for (User user : users) {
-            System.out.println("-------------User " + indice + "-----------------");
+            System.out.println("-------------User [" + indice + "]-----------------");
             print.printClass(user);
             System.out.print("\n");
             indice++;
         }
+        int id = Integer.parseInt(input.nextLine());
+
+        User user = users.get(id);
+
+        System.out.println("Comece a alteração :");
+        System.out.print("Nome antigo:" + user.getName() + "\n");
+        user.setName(input.nextLine());
+        System.out.print("Email antigo:" + user.getEmail() + "\n");
+        user.setEmail(input.nextLine());
+        System.out.print("Cpf antigo:" + user.getCpf() + "\n");
+        user.setCpf(input.nextLine());
+
+        managerUser.updateUserController(user, user.getId());
+
+    }
+
+    public void deleteUserPage() {
+        Scanner input = new Scanner(System.in);
+        List<User> users = managerUser.listUserController();
+
+        int indice = 0;
+
+        System.out.println("Digite o indice do User que dejesa deletar");
+        for (User user : users) {
+            System.out.println("-------------User [" + indice + "]-----------------");
+            print.printClass(user);
+            System.out.print("\n");
+            indice++;
+        }
+        int id = Integer.parseInt(input.nextLine());
+
+        User user = users.get(id);
+
+        managerUser.deleteUserController(user.getId());
+
     }
 
 }

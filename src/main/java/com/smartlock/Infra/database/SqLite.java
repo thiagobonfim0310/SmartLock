@@ -147,7 +147,7 @@ public class SqLite implements Database {
                 String email = rs.getString("email");
                 String cpf = rs.getString("cpf");
                 // Aqui você precisará desserializar a string 'perms' para obter os ambientes
-                Enviroments[] perms = format.deserializeEnviroments(rs.getString("perms"));
+                List<Enviroments> perms = format.deserializeEnviroments(rs.getString("perms"));
 
                 User user = new User();
                 user.setId(id);
@@ -162,5 +162,48 @@ public class SqLite implements Database {
         }
 
         return users;
+    }
+
+    public void updateUsers(User user, UUID id) {
+        DataToJson format = new DataToJson();
+        String sql = "UPDATE users SET name = ?, email = ?, cpf = ?, perms = ? WHERE id = ?";
+
+        try (Connection conn = connect();
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, user.getName());
+            pstmt.setString(2, user.getEmail());
+            pstmt.setString(3, user.getCpf());
+            pstmt.setString(4, format.serializeEnviroments(user.getPerms()));
+            pstmt.setString(5, user.getId().toString());
+
+            int rowsAffected = pstmt.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("Usuário atualizado com sucesso.");
+            } else {
+                System.out.println("Nenhum usuário foi atualizado.");
+            }
+        } catch (SQLException e) {
+            System.out.println("Erro ao atualizar usuário: " + e.getMessage());
+        }
+    }
+
+    public void deleteUser(UUID id) {
+        String sql = "DELETE FROM users WHERE id = ?";
+
+        try (Connection conn = connect();
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, id.toString());
+
+            int rowsAffected = pstmt.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("Usuário removido com sucesso.");
+            } else {
+                System.out.println("Nenhum usuário foi removido com o ID especificado.");
+            }
+        } catch (SQLException e) {
+            System.out.println("Erro ao remover usuário: " + e.getMessage());
+        }
     }
 }
