@@ -1,20 +1,29 @@
 package com.smartlock.Business.entities;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 public class User {
 
-    private String id;
+    public User() {
+        this.perms = new ArrayList<Enviroments>();
+        this.type = new ArrayList<String>();
+    }
+
+    private UUID id;
     private String name;
     private String email;
     private String cpf;
-    private String type[];
-    private String number;
+    private List<String> type;
+    private List<Enviroments> perms;
 
-    public String getId() {
+    public UUID getId() {
         return id;
     }
 
-    public String getNumber() {
-        return number;
+    public List<Enviroments> getPerms() {
+        return perms;
     }
 
     public String getCpf() {
@@ -29,16 +38,20 @@ public class User {
         return name;
     }
 
-    public String[] getType() {
+    public List<String> getType() {
         return type;
     }
 
-    public void setType(String type[]) {
+    public void setType(List<String> type) {
         this.type = type;
     }
 
     public void setCpf(String cpf) {
         this.cpf = cpf;
+    }
+
+    public void setPerms(List<Enviroments> perms) {
+        this.perms = perms;
     }
 
     public void setEmail(String email) {
@@ -49,12 +62,8 @@ public class User {
         this.name = name;
     }
 
-    public void setId(String id) {
+    public void setId(UUID id) {
         this.id = id;
-    }
-
-    public void setNumber(String number) {
-        this.number = number;
     }
 
 }
