@@ -17,13 +17,19 @@ public class UserManager {
         data = database;
     }
 
-    public void registerUserController(User usuario) throws EmailNotFoundException {
+    public void registerUserController(User user) throws EmailNotFoundException {
 
-        if (!ValidateUser.validateEmail(usuario.getEmail())) {
+        if (!ValidateUser.validateEmail(user.getEmail())) {
             throw new EmailNotFoundException();
         }
-        usuario.setId(UUID.randomUUID());
-        data.saveUser(usuario);
+        user.setId(UUID.randomUUID());
+        if (user.getType().isEmpty()) {
+            List<String> types = new ArrayList<>();
+            types.add("Colaborador");
+            user.setType(types);
+
+        }
+        data.saveUser(user);
     }
 
     public List<User> listUserController() {
@@ -31,6 +37,15 @@ public class UserManager {
 
         users = data.getUsers();
         return users;
+    }
+
+    public void updateUserController(User user, UUID id) {
+
+        data.updateUsers(user, id);
+    }
+
+    public void deleteUserController(UUID id) {
+        data.deleteUser(id);
     }
 
 }
