@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import com.smartlock.Business.entities.Admin;
 import com.smartlock.Business.entities.Enviroments;
 import com.smartlock.Business.entities.User;
 import com.smartlock.Infra.util.DataToJson;
@@ -31,6 +32,15 @@ public class SqLite implements Database {
             Statement stmt = conn.createStatement();
 
             // Criar tabelas
+
+            String sqlCreateAdminTable = "CREATE TABLE IF NOT EXISTS admins (" +
+                    "id TEXT PRIMARY KEY," +
+                    "name TEXT NOT NULL," +
+                    "email TEXT NOT NULL," +
+                    "password TEXT NOT NULL)";
+            stmt.execute(sqlCreateAdminTable);
+            System.out.println("Tabela 'admins' criada com sucesso.");
+
             String sqlCreateUsersTable = "CREATE TABLE IF NOT EXISTS users (" +
                     "id TEXT PRIMARY KEY," +
                     "name TEXT NOT NULL," +
@@ -79,6 +89,12 @@ public class SqLite implements Database {
             stmt.execute(sqlCreateTypeOfUsersTable);
             System.out.println("Tabela 'typeOfUsers' criada com sucesso.");
 
+            // Inserir dados com na Tabela Admin
+            String sqlInsertAdmin = "INSERT INTO admins (id, name, email, password) VALUES ('"
+                    + UUID.randomUUID().toString()
+                    + "', 'Admin', 'admin@admin.com', 'admin')";
+            stmt.execute(sqlInsertAdmin);
+            System.out.println("Dados do tipo 'Admin' inseridos com sucesso.");
             // Inserir dados com na Tabela TypeId
             String sqlInsertProfessor = "INSERT INTO typeOfUsers (id, name) VALUES ('" + UUID.randomUUID().toString()
                     + "', 'Professor')";
@@ -204,6 +220,24 @@ public class SqLite implements Database {
             }
         } catch (SQLException e) {
             System.out.println("Erro ao remover usuário: " + e.getMessage());
+        }
+    }
+
+    public boolean autenticarAdmin(String email, String password) {
+        String sql = "SELECT * FROM admins WHERE email = ? AND password = ?";
+
+        try (Connection conn = connect();
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, email);
+            pstmt.setString(2, password);
+
+            ResultSet rs = pstmt.executeQuery();
+            return rs.next(); // Retorna true se o admin foi encontrado, false caso contrário
+
+        } catch (SQLException e) {
+            System.out.println("Erro ao autenticar admin: " + e.getMessage());
+            return false; // Retorna false em caso de exceção
         }
     }
 }
