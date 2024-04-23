@@ -22,7 +22,7 @@ public class UserPage {
         User user = new User();
         Scanner input = new Scanner(System.in);
 
-        System.out.println("Comece o cadastro :");
+        System.out.println("Comece o cadastro: ");
         System.out.println("Cadastrar Usuario \n");
         System.out.print("Nome: \n");
         user.setName(input.nextLine());
@@ -56,7 +56,7 @@ public class UserPage {
 
         int indice = 0;
 
-        System.out.println("Digite o indice do User que dejesa atualizar");
+        System.out.println("Digite o indice do User que deseja atualizar");
         for (User user : users) {
             System.out.println("-------------User [" + indice + "]-----------------");
             print.printClass(user);
@@ -67,12 +67,12 @@ public class UserPage {
 
         User user = users.get(id);
 
-        System.out.println("Comece a alteração :");
-        System.out.print("Nome antigo:" + user.getName() + "\n");
+        System.out.println("Comece a alteração: ");
+        System.out.print("Nome antigo: " + user.getName() + "\n");
         user.setName(input.nextLine());
-        System.out.print("Email antigo:" + user.getEmail() + "\n");
+        System.out.print("Email antigo: " + user.getEmail() + "\n");
         user.setEmail(input.nextLine());
-        System.out.print("Cpf antigo:" + user.getCpf() + "\n");
+        System.out.print("Cpf antigo: " + user.getCpf() + "\n");
         user.setCpf(input.nextLine());
 
         managerUser.updateUserController(user, user.getId());
