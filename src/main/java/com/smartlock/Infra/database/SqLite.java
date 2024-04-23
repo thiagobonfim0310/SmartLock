@@ -206,4 +206,58 @@ public class SqLite implements Database {
             System.out.println("Erro ao remover usuário: " + e.getMessage());
         }
     }
+
+    List<Enviroments> enviroments =  new ArrayList<>();
+
+    public void saveEnviroment(Enviroments enviroment){
+        String sql = "INSERT INTO enviroments (id, name) VALUE (?, ?)";
+
+        try (Connection conn = connect();
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, enviroment.getId().toString());
+            pstmt.setString(2, enviroment.getName());
+
+            pstmt.executeUpdate();
+            System.out.println("Ambiente inserido com sucesso.");
+            } catch (SQLException e) {
+                System.out.println("Erro ao inserir ambiente: " + e.getMessage());
+            }
+    }
+
+    public List<Enviroments> getEnviroments() {
+        List<Enviroments> enviroments = new ArrayList<>();
+        DataToJson format = new DataToJson();
+        String sql = "SELECT * FROM enviroments";
+
+        try (Connection conn = connect();
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                UUID id = UUID.fromString(rs.getString("id"));
+                String name = rs.getString("name");
+
+                Enviroments enviroment = new Enviroments();
+                enviroment.setId(id);
+                enviroment.setName(name);
+            }
+        } catch (SQLException e) {
+            System.out.println("Erro ao buscar ambientes: " + e.getMessage());
+        }
+
+        return enviroments;
+    }
+
+    public void updateEnviroments(Enviroments enviroment, UUID id) {
+        DataToJson format = new DataToJson();
+        String sql = "UPDATE enviroments SET name = ? WHERE id = ?";
+
+        try (Connection conn = connect()) {
+            
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+    }
 }
