@@ -22,4 +22,20 @@ public class EnviromentManager {
 
         data.saveEnviroment(enviroment);
     }
+
+    public List<Enviroments> listEnviromentController() {
+        List<Enviroments> enviroments = new ArrayList<>();
+
+        enviroments = data.getEnviroments();
+        return enviroments;
+    }
+
+    public void updateEnviromentController(Enviroments enviroment, UUID id) {
+        
+        data.updateEnviroments(enviroment, id);
+    }
+
+    public void deleteEnviromentController(UUID id) {
+        data.deleteEnviroments(id);
+    }
 }
