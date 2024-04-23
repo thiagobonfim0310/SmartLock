@@ -6,12 +6,14 @@ import java.util.UUID;
 
 import com.smartlock.Business.entities.Enviroments;
 import com.smartlock.Business.entities.Admin;
+import com.smartlock.Business.entities.Lock;
 import com.smartlock.Business.entities.User;
 
 public class Memory implements Database {
     List<User> users = new ArrayList<>();
     List<Enviroments> enviroments = new ArrayList<>();
     List<Admin> admins = new ArrayList<>();
+    List<Lock> locks = new ArrayList<>();
 
     public Memory() {
         Admin adm = new Admin();
@@ -37,7 +39,7 @@ public class Memory implements Database {
         users.add(usuario);
     }
 
-    public List<User> getUsers() {
+    public List<User> listUsers() {
         return users;
     }
 
@@ -61,12 +63,39 @@ public class Memory implements Database {
         }
     }
 
+    public void saveLock(Lock Lock) {
+        locks.add(Lock);
+    }
+
+    public List<Lock> listLocks() {
+        return locks;
+    }
+
+    public void updateLock(Lock lock, UUID id) {
+
+        for (Lock loc : locks) {
+            if (loc.getId().equals(id)) {
+                loc = lock;
+            }
+
+        }
+    }
+
+    public void deleteLock(UUID id) {
+
+        for (Lock loc : locks) {
+            if (loc.getId().equals(id)) {
+                locks.remove(loc);
+            }
+
+        }
+    }
 
     public void saveEnviroment(Enviroments enviroment) {
         enviroments.add(enviroment);
     }
 
-    public List<Enviroments> getEnviroments() {
+    public List<Enviroments> listEnviroments() {
         return enviroments;
     }
 
@@ -81,7 +110,7 @@ public class Memory implements Database {
 
     public void deleteEnviroments(UUID id) {
 
-        for(Enviroments env : enviroments) {
+        for (Enviroments env : enviroments) {
             if (env.getEnviroments().equals(id)) {
                 enviroments.remove(env);
             }
