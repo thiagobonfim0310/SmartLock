@@ -35,7 +35,7 @@ public class UserManager {
     public List<User> listUserController() {
         List<User> users = new ArrayList<>();
 
-        users = data.getUsers();
+        users = data.listUsers();
         return users;
     }
 

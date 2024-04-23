@@ -24,6 +24,19 @@ public class SqLite implements Database {
         return DriverManager.getConnection("jdbc:sqlite:database.db");
     }
 
+    private boolean tabelaVazia() {
+        String sql = "SELECT COUNT(*) FROM admins";
+        try (Connection conn = connect();
+                PreparedStatement pstmt = conn.prepareStatement(sql);
+                ResultSet rs = pstmt.executeQuery()) {
+            int count = rs.getInt(1);
+            return count == 0; // Retorna true se a tabela estiver vazia
+        } catch (SQLException e) {
+            System.out.println("Erro ao verificar se a tabela de admins está vazia: " + e.getMessage());
+            return true; // Assume que a tabela está vazia em caso de erro
+        }
+    }
+
     public SqLite() {
         try {
             // Conectar ao banco de dados ou criá-lo se não existir
@@ -92,10 +105,13 @@ public class SqLite implements Database {
             System.out.println("Tabela 'typeOfUsers' criada com sucesso.");
 
             // Inserir dados com na Tabela Admin
-            String sqlInsertAdmin = "INSERT INTO admins (id, name, email, password) VALUES ('"
-                    + UUID.randomUUID().toString()
-                    + "', 'Admin', 'admin@admin.com', 'admin')";
-            stmt.execute(sqlInsertAdmin);
+            if (tabelaVazia()) {
+
+                String sqlInsertAdmin = "INSERT INTO admins (id, name, email, password) VALUES ('"
+                        + UUID.randomUUID().toString()
+                        + "', 'Admin', 'admin@admin.com', 'admin')";
+                stmt.execute(sqlInsertAdmin);
+            }
             System.out.println("Dados do tipo 'Admin' inseridos com sucesso.");
             // Inserir dados com na Tabela TypeId
             String sqlInsertProfessor = "INSERT INTO typeOfUsers (id, name) VALUES ('" + UUID.randomUUID().toString()
@@ -147,7 +163,7 @@ public class SqLite implements Database {
         }
     }
 
-    public List<User> getUsers() {
+    public List<User> listUsers() {
         List<User> users = new ArrayList<>();
         DataToJson format = new DataToJson();
         String sql = "SELECT * FROM  users";
@@ -244,7 +260,7 @@ public class SqLite implements Database {
     List<Enviroments> enviroments = new ArrayList<>();
 
     public void saveEnviroment(Enviroments enviroment) {
-        String sql = "INSERT INTO enviroments (id, name) VALUE (?, ?)";
+        String sql = "INSERT INTO enviroments (id, name) VALUES (?, ?)";
 
         try (Connection conn = connect();
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -259,9 +275,9 @@ public class SqLite implements Database {
         }
     }
 
-    public List<Enviroments> getEnviroments() {
+    public List<Enviroments> listEnviroments() {
         List<Enviroments> enviroments = new ArrayList<>();
-        DataToJson format = new DataToJson();
+
         String sql = "SELECT * FROM enviroments";
 
         try (Connection conn = connect();
@@ -276,6 +292,7 @@ public class SqLite implements Database {
                 Enviroments enviroment = new Enviroments();
                 enviroment.setId(id);
                 enviroment.setName(name);
+                enviroments.add(enviroment);
             }
         } catch (SQLException e) {
             System.out.println("Erro ao buscar ambientes: " + e.getMessage());
@@ -288,8 +305,16 @@ public class SqLite implements Database {
         DataToJson format = new DataToJson();
         String sql = "UPDATE enviroments SET name = ? WHERE id = ?";
 
-        try (Connection conn = connect()) {
+        try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, enviroment.getName());
+            pstmt.setString(2, enviroment.getId().toString());
 
+            int rowsAffected = pstmt.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("Ambiente atualizado com sucesso.");
+            } else {
+                System.out.println("Nenhum Ambiente foi atualizado.");
+            }
         } catch (Exception e) {
             // TODO: handle exception
         }
@@ -315,7 +340,7 @@ public class SqLite implements Database {
     }
 
     public void saveLock(Lock lock) {
-        String sql = "INSERT INTO locks (id, numberOfSerie, enviroment_id, protocol) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO locks (id, numberOfSerie, enviromentId, protocol) VALUES (?, ?, ?, ?)";
 
         try (Connection conn = connect();
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -346,7 +371,7 @@ public class SqLite implements Database {
                 UUID id = UUID.fromString(rs.getString("id"));
                 String numberOfSerie = rs.getString("numberOfSerie");
                 // Recupera o ID do ambiente a partir da coluna enviroment_id
-                UUID enviromentId = UUID.fromString(rs.getString("enviroment_id"));
+                UUID enviromentId = UUID.fromString(rs.getString("enviromentId"));
                 pstmtEnviroment.setString(1, enviromentId.toString());
                 ResultSet rsEnviroment = pstmtEnviroment.executeQuery();
                 enviroment.setId(enviromentId);
@@ -384,7 +409,7 @@ public class SqLite implements Database {
     }
 
     public void updateLock(Lock lock, UUID id) {
-        String sql = "UPDATE locks SET numberOfSerie = ?, enviroment_id = ?, protocol = ? WHERE id = ?";
+        String sql = "UPDATE locks SET numberOfSerie = ?, enviromentId = ?, protocol = ? WHERE id = ?";
 
         try (Connection conn = connect();
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {

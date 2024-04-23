@@ -9,7 +9,7 @@ import com.smartlock.Business.entities.Enviroments;
 import com.smartlock.View.util.PrintEntities;
 
 public class EnviromentPage {
-    
+
     EnviromentManager manageEnviroment;
     PrintEntities print = new PrintEntities();
 
@@ -25,8 +25,10 @@ public class EnviromentPage {
         System.out.println("Cadastrar Ambiente \n");
         System.out.print("Nome: \n");
         enviroment.setName(input.nextLine());
-        //TO DO: Fazer a verificação de hierarquias de ambientes
-        //TO DO: Adicionar os tratamentos de exceção
+        print.printClass(enviroment);
+        manageEnviroment.registerEnviromentController(enviroment);
+        // TO DO: Fazer a verificação de hierarquias de ambientes
+        // TO DO: Adicionar os tratamentos de exceção
         System.out.print("------------------Cadastro Finalizado------------------ \n");
 
     }
@@ -61,7 +63,7 @@ public class EnviromentPage {
         System.out.println("Comece a alteração: ");
         System.out.print("Nome antigo: " + enviroment.getName() + "\n");
         enviroment.setName(input.nextLine());
-        
+
         manageEnviroment.updateEnviromentController(enviroment, enviroment.getId());
     }
 

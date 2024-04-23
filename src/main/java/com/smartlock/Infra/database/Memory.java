@@ -39,7 +39,7 @@ public class Memory implements Database {
         users.add(usuario);
     }
 
-    public List<User> getUsers() {
+    public List<User> listUsers() {
         return users;
     }
 
@@ -95,7 +95,7 @@ public class Memory implements Database {
         enviroments.add(enviroment);
     }
 
-    public List<Enviroments> getEnviroments() {
+    public List<Enviroments> listEnviroments() {
         return enviroments;
     }
 

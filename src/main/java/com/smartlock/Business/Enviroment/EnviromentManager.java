@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 public class EnviromentManager {
-    
+
     Database data;
 
     public EnviromentManager(Database database) {
@@ -17,7 +17,7 @@ public class EnviromentManager {
     }
 
     public void registerEnviromentController(Enviroments enviroment) {
-        
+
         enviroment.setId(UUID.randomUUID());
 
         data.saveEnviroment(enviroment);
@@ -26,12 +26,12 @@ public class EnviromentManager {
     public List<Enviroments> listEnviromentController() {
         List<Enviroments> enviroments = new ArrayList<>();
 
-        enviroments = data.getEnviroments();
+        enviroments = data.listEnviroments();
         return enviroments;
     }
 
     public void updateEnviromentController(Enviroments enviroment, UUID id) {
-        
+
         data.updateEnviroments(enviroment, id);
     }
 

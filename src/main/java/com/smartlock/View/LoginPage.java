@@ -20,15 +20,17 @@ public class LoginPage {
         String email;
         String password;
         while (true) {
-            System.out.println("---------- Login ----------");
-            System.out.println("Email: ");
-            email = input.nextLine().toString();
-            System.out.println("Senha:");
-            password = input.nextLine().toString();
-
-            if (managerAdmin.autenticaterAdmin(email, password)) {
-                this.menu.menu();
-            }
+            /*
+             * System.out.println("---------- Login ----------");
+             * System.out.println("Email: ");
+             * email = input.nextLine().toString();
+             * System.out.println("Senha:");
+             * password = input.nextLine().toString();
+             * 
+             * if (managerAdmin.autenticaterAdmin(email, password)) {
+             */
+            this.menu.menu();
+            // }
             System.out.println("Senha ou email errado \n");
         }
     }

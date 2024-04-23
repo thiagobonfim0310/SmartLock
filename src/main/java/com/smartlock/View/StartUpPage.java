@@ -3,13 +3,22 @@ package com.smartlock.View;
 import java.util.Scanner;
 
 import com.smartlock.Business.User.UserManager;
+import com.smartlock.View.Enviroment.EnviromentMenu;
+import com.smartlock.View.Lock.LockMenu;
+import com.smartlock.View.User.UserMenu;
 import com.smartlock.View.User.UserPage;
 
 public class StartUpPage {
-    UserPage userPage;
+    UserMenu userMenu;
+    LockMenu lockMenu;
+    EnviromentMenu enviromentMenu;
 
-    public StartUpPage(UserPage user) {
-        userPage = user;
+    public StartUpPage(UserMenu user, LockMenu lock, EnviromentMenu enviroment) {
+
+        this.userMenu = user;
+        this.lockMenu = lock;
+        this.enviromentMenu = enviroment;
+
     }
 
     public void menu() {
@@ -17,26 +26,23 @@ public class StartUpPage {
         int option;
         while (true) {
             System.out.println("Selecione a opção que deseja ");
-            System.out.println("[1] - Cadastrar Usuário");
-            System.out.println("[2] - Listar Usuário ");
-            System.out.println("[3] - Atualizar Usuário ");
-            System.out.println("[4] - Deletar Usuário ");
+            System.out.println("[1] - Gerencimento de Usuário");
+            System.out.println("[2] - Gerencimento Ambientes ");
+            System.out.println("[3] - Gerenciamento de Trancas ");
 
             Scanner input = new Scanner(System.in);
             option = input.nextInt();
             switch (option) {
                 case 1:
-                    this.userPage.registerUserPage();
+                    this.userMenu.menu();
                     break;
                 case 2:
-                    this.userPage.listUserPage();
+                    this.enviromentMenu.menu();
                     break;
                 case 3:
-                    this.userPage.updateUserPage();
+                    this.lockMenu.menu();
                     break;
-                case 4:
-                    this.userPage.deleteUserPage();
-                    break;
+
                 default:
                     break;
             }

@@ -13,7 +13,7 @@ public interface Database {
 
     public void saveUser(User usuario);
 
-    public List<User> getUsers();
+    public List<User> listUsers();
 
     public void updateUsers(User user, UUID id);
 
@@ -31,7 +31,7 @@ public interface Database {
 
     public void saveEnviroment(Enviroments enviroment);
 
-    public List<Enviroments> getEnviroments();
+    public List<Enviroments> listEnviroments();
 
     public void updateEnviroments(Enviroments enviroment, UUID id);
 

@@ -5,8 +5,10 @@ import java.util.Scanner;
 
 import org.sqlite.date.ExceptionUtils;
 
+import com.smartlock.Business.Enviroment.EnviromentManager;
 import com.smartlock.Business.Lock.LockManager;
 import com.smartlock.Business.User.UserManager;
+import com.smartlock.Business.entities.Enviroments;
 import com.smartlock.Business.entities.Lock;
 import com.smartlock.Business.entities.User;
 import com.smartlock.Business.exceptions.EmailNotFoundException;
@@ -15,15 +17,18 @@ import com.smartlock.Business.entities.Lock;;
 
 public class LockPage {
     LockManager managerLock;
+    EnviromentManager manageEnviroment;
     PrintEntities print = new PrintEntities();
 
-    public LockPage(LockManager lockManager) {
+    public LockPage(LockManager lockManager, EnviromentManager enviromentManager) {
         managerLock = lockManager;
+        manageEnviroment = enviromentManager;
     }
 
     public void registerLockPage() {
         Lock lock = new Lock();
         Scanner input = new Scanner(System.in);
+        int indice = 0;
 
         System.out.println("Comece o cadastro :");
         System.out.println("Cadastrar Tranca \n");
@@ -31,7 +36,20 @@ public class LockPage {
         lock.setNumerOfSerie(input.nextLine());
         System.out.print("Protocolo: \n");
         lock.setProtocol(input.nextLine());
-        // TO-DO : Adicionar o cadastro de tipo
+        System.out.print("Escolha o  Ambiente que a tranca está instalada: \n");
+        List<Enviroments> enviroments = manageEnviroment.listEnviromentController();
+
+        System.out.println("Digite o indice do Ambiente que deseja");
+        for (Enviroments enviroment : enviroments) {
+            System.out.println("-------------Ambiente [" + indice + "]-----------------");
+            print.printClass(enviroment);
+            System.out.print("\n");
+            indice++;
+        }
+        int id = Integer.parseInt(input.nextLine());
+        Enviroments enviroment = enviroments.get(id);
+
+        lock.setEnviroment(enviroment);
         try {
             managerLock.registerLockController(lock);
         } catch (Exception e) {
@@ -41,7 +59,7 @@ public class LockPage {
 
     }
 
-    public void listUserPage() {
+    public void listLockPage() {
         List<Lock> locks = managerLock.listLockController();
 
         for (Lock lock : locks) {
@@ -51,7 +69,7 @@ public class LockPage {
         }
     }
 
-    public void updateUserPage() {
+    public void updateLockPage() {
         Scanner input = new Scanner(System.in);
         List<Lock> locks = managerLock.listLockController();
 
@@ -73,11 +91,24 @@ public class LockPage {
         lock.setNumerOfSerie(input.nextLine());
         System.out.print("Protocolo antigo:" + lock.getProtocol() + "\n");
         lock.setProtocol(input.nextLine());
+        List<Enviroments> enviroments = manageEnviroment.listEnviromentController();
+        indice = 0;
+        System.out.println("Digite o indice do Ambiente que deseja");
+        for (Enviroments enviroment : enviroments) {
+            System.out.println("-------------Ambiente [" + indice + "]-----------------");
+            print.printClass(enviroment);
+            System.out.print("\n");
+            indice++;
+        }
+        id = Integer.parseInt(input.nextLine());
+        Enviroments enviroment = enviroments.get(id);
+
+        lock.setEnviroment(enviroment);
 
         managerLock.updateLockController(lock, lock.getId());
     }
 
-    public void deleteUserPage() {
+    public void deleteLockPage() {
         Scanner input = new Scanner(System.in);
         List<Lock> locks = managerLock.listLockController();
 
