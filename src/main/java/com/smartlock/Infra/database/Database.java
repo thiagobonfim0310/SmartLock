@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.UUID;
 
 import com.smartlock.Business.entities.Admin;
+import com.smartlock.Business.entities.Lock;
 import com.smartlock.Business.entities.User;
 
 public interface Database {
@@ -18,4 +19,12 @@ public interface Database {
     public void deleteUser(UUID id);
 
     public boolean autenticarAdmin(String email, String password);
+
+    public void saveLock(Lock Lock);
+
+    public List<Lock> listLocks();
+
+    public void updateLock(Lock lock, UUID id);
+
+    public void deleteLock(UUID id);
 }

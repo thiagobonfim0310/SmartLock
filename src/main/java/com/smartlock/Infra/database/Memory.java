@@ -5,11 +5,13 @@ import java.util.List;
 import java.util.UUID;
 
 import com.smartlock.Business.entities.Admin;
+import com.smartlock.Business.entities.Lock;
 import com.smartlock.Business.entities.User;
 
 public class Memory implements Database {
     List<User> users = new ArrayList<>();
     List<Admin> admins = new ArrayList<>();
+    List<Lock> locks = new ArrayList<>();
 
     public Memory() {
         Admin adm = new Admin();
@@ -54,6 +56,34 @@ public class Memory implements Database {
         for (User use : users) {
             if (use.getId().equals(id)) {
                 users.remove(use);
+            }
+
+        }
+    }
+
+    public void saveLock(Lock Lock) {
+        locks.add(Lock);
+    }
+
+    public List<Lock> listLocks() {
+        return locks;
+    }
+
+    public void updateLock(Lock lock, UUID id) {
+
+        for (Lock loc : locks) {
+            if (loc.getId().equals(id)) {
+                loc = lock;
+            }
+
+        }
+    }
+
+    public void deleteLock(UUID id) {
+
+        for (Lock loc : locks) {
+            if (loc.getId().equals(id)) {
+                locks.remove(loc);
             }
 
         }
