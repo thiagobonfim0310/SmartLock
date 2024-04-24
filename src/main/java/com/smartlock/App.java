@@ -4,6 +4,8 @@ import com.smartlock.Business.Admin.AdminManager;
 import com.smartlock.Business.Enviroment.EnviromentManager;
 import com.smartlock.Business.Lock.LockManager;
 import com.smartlock.Business.User.UserManager;
+import com.smartlock.Business.adapters.ValidateEmailAdapter;
+import com.smartlock.Business.validators.ValidateEmail;
 import com.smartlock.Infra.database.Database;
 import com.smartlock.Infra.database.Memory;
 import com.smartlock.Infra.database.SqLite;
@@ -24,8 +26,9 @@ public class App {
     public static void main(String[] args) {
         Database database = new SqLite();
         // Managers
+        ValidateEmail validateEmail = new ValidateEmailAdapter();
         AdminManager adminManager = new AdminManager(database);
-        UserManager userManager = new UserManager(database);
+        UserManager userManager = new UserManager(database, validateEmail);
         LockManager lockManager = new LockManager(database);
         EnviromentManager enviromentManager = new EnviromentManager(database);
         // Pages
