@@ -24,8 +24,8 @@ public class SqLite implements Database {
         return DriverManager.getConnection("jdbc:sqlite:database.db");
     }
 
-    private boolean tabelaVazia() {
-        String sql = "SELECT COUNT(*) FROM admins";
+    private boolean tabelaVazia(String tabela) {
+        String sql = "SELECT COUNT(*) FROM " + tabela;
         try (Connection conn = connect();
                 PreparedStatement pstmt = conn.prepareStatement(sql);
                 ResultSet rs = pstmt.executeQuery()) {
@@ -105,29 +105,34 @@ public class SqLite implements Database {
             System.out.println("Tabela 'typeOfUsers' criada com sucesso.");
 
             // Inserir dados com na Tabela Admin
-            if (tabelaVazia()) {
+            if (tabelaVazia("admins")) {
 
                 String sqlInsertAdmin = "INSERT INTO admins (id, name, email, password) VALUES ('"
                         + UUID.randomUUID().toString()
                         + "', 'Admin', 'admin@admin.com', 'admin')";
                 stmt.execute(sqlInsertAdmin);
+                System.out.println("Dados do tipo 'Admin' inseridos com sucesso.");
             }
-            System.out.println("Dados do tipo 'Admin' inseridos com sucesso.");
             // Inserir dados com na Tabela TypeId
-            String sqlInsertProfessor = "INSERT INTO typeOfUsers (id, name) VALUES ('" + UUID.randomUUID().toString()
-                    + "', 'Professor')";
-            stmt.execute(sqlInsertProfessor);
-            System.out.println("Dados do tipo 'Professor' inseridos com sucesso.");
+            if (tabelaVazia("typeOfUsers")) {
 
-            String sqlInsertAluno = "INSERT INTO typeOfUsers (id, name) VALUES ('" + UUID.randomUUID().toString()
-                    + "', 'Aluno')";
-            stmt.execute(sqlInsertAluno);
-            System.out.println("Dados do tipo 'Aluno' inseridos com sucesso.");
+                String sqlInsertProfessor = "INSERT INTO typeOfUsers (id, name) VALUES ('"
+                        + UUID.randomUUID().toString()
+                        + "', 'Professor')";
+                stmt.execute(sqlInsertProfessor);
+                System.out.println("Dados do tipo 'Professor' inseridos com sucesso.");
 
-            String sqlInsertColaborador = "INSERT INTO typeOfUsers (id, name) VALUES ('" + UUID.randomUUID().toString()
-                    + "', 'Colaborador')";
-            stmt.execute(sqlInsertColaborador);
-            System.out.println("Dados do tipo 'Colaborador' inseridos com sucesso.");
+                String sqlInsertAluno = "INSERT INTO typeOfUsers (id, name) VALUES ('" + UUID.randomUUID().toString()
+                        + "', 'Aluno')";
+                stmt.execute(sqlInsertAluno);
+                System.out.println("Dados do tipo 'Aluno' inseridos com sucesso.");
+
+                String sqlInsertColaborador = "INSERT INTO typeOfUsers (id, name) VALUES ('"
+                        + UUID.randomUUID().toString()
+                        + "', 'Colaborador')";
+                stmt.execute(sqlInsertColaborador);
+                System.out.println("Dados do tipo 'Colaborador' inseridos com sucesso.");
+            }
 
         } catch (SQLException e) {
             System.out.println("Erro ao conectar ao banco de dados: " + e.getMessage());
@@ -145,7 +150,7 @@ public class SqLite implements Database {
     public void saveUser(User user) {
 
         DataToJson format = new DataToJson();
-        String sql = "INSERT INTO users (id, name, email, cpf, perms) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO users (id, name, email, cpf, type ,perms) VALUES (?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = connect();
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -154,7 +159,8 @@ public class SqLite implements Database {
             pstmt.setString(2, user.getName());
             pstmt.setString(3, user.getEmail());
             pstmt.setString(4, user.getCpf());
-            pstmt.setString(5, format.serializeEnviroments(user.getPerms()));
+            pstmt.setString(5, format.serializeType(user.getType()));
+            pstmt.setString(6, format.serializeEnviroments(user.getPerms()));
 
             pstmt.executeUpdate();
             System.out.println("Usuário inserido com sucesso.");
@@ -178,7 +184,7 @@ public class SqLite implements Database {
                 String name = rs.getString("name");
                 String email = rs.getString("email");
                 String cpf = rs.getString("cpf");
-                // Aqui você precisará desserializar a string 'perms' para obter os ambientes
+                List<String> type = format.deserializeTypes(rs.getString("type"));
                 List<Enviroments> perms = format.deserializeEnviroments(rs.getString("perms"));
 
                 User user = new User();
@@ -186,6 +192,7 @@ public class SqLite implements Database {
                 user.setCpf(cpf);
                 user.setName(name);
                 user.setEmail(email);
+                user.setType(type);
                 user.setPerms(perms);
                 users.add(user);
             }

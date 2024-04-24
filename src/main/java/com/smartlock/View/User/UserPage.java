@@ -4,6 +4,7 @@ import java.util.Scanner;
 import java.util.UUID;
 import java.util.List;
 
+import com.smartlock.Business.User.UserFactory;
 import com.smartlock.Business.User.UserManager;
 import com.smartlock.Business.entities.User;
 import com.smartlock.Business.exceptions.EmailNotFoundException;
@@ -19,11 +20,25 @@ public class UserPage {
     }
 
     public void registerUserPage() {
-        User user = new User();
+        User user;
         Scanner input = new Scanner(System.in);
 
         System.out.println("Comece o cadastro: ");
         System.out.println("Cadastrar Usuario \n");
+        System.out.println("Qual o tipo  Professor[1], Aluno[2], Genérico[3] \n");
+        int id = Integer.parseInt(input.nextLine());
+        switch (id) {
+            case 1:
+                user = UserFactory.criarUsuario("professor");
+                break;
+            case 2:
+                user = UserFactory.criarUsuario("aluno");
+                break;
+
+            default:
+                user = UserFactory.criarUsuario("generico");
+                break;
+        }
         System.out.print("Nome: \n");
         user.setName(input.nextLine());
         System.out.print("Email: \n");

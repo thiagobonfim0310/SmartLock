@@ -6,17 +6,24 @@ import java.util.UUID;
 
 public class User {
 
-    public User() {
-        this.perms = new ArrayList<Enviroments>();
-        this.type = new ArrayList<String>();
-    }
-
     private UUID id;
     private String name;
     private String email;
     private String cpf;
     private List<String> type;
     private List<Enviroments> perms;
+
+    public User() {
+        this.perms = new ArrayList<Enviroments>();
+        this.type = new ArrayList<String>();
+    }
+
+    public User(String type) {
+        this.perms = new ArrayList<Enviroments>();
+        List<String> types = new ArrayList<>();
+        types.add(type);
+        this.type = types;
+    }
 
     public UUID getId() {
         return id;

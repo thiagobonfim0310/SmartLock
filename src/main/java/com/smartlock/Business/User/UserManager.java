@@ -27,7 +27,6 @@ public class UserManager {
             List<String> types = new ArrayList<>();
             types.add("Colaborador");
             user.setType(types);
-
         }
         data.saveUser(user);
     }
