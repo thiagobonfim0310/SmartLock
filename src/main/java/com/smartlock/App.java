@@ -32,7 +32,7 @@ public class App {
         LockManager lockManager = new LockManager(database);
         EnviromentManager enviromentManager = new EnviromentManager(database);
         // Pages
-        UserPage userPage = new UserPage(userManager);
+        UserPage userPage = new UserPage(userManager, enviromentManager);
         LockPage lockPage = new LockPage(lockManager, enviromentManager);
         EnviromentPage enviromentPage = new EnviromentPage(enviromentManager);
         // Menu

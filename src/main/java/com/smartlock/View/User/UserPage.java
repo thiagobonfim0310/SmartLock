@@ -4,8 +4,10 @@ import java.util.Scanner;
 import java.util.UUID;
 import java.util.List;
 
+import com.smartlock.Business.Enviroment.EnviromentManager;
 import com.smartlock.Business.User.UserFactory;
 import com.smartlock.Business.User.UserManager;
+import com.smartlock.Business.entities.Enviroments;
 import com.smartlock.Business.entities.User;
 import com.smartlock.Business.exceptions.EmailNotFoundException;
 import com.smartlock.View.util.PrintEntities;
@@ -13,10 +15,12 @@ import com.smartlock.View.util.PrintEntities;
 public class UserPage {
 
     UserManager managerUser;
+    EnviromentManager managerEnviroment;
     PrintEntities print = new PrintEntities();
 
-    public UserPage(UserManager userManager) {
+    public UserPage(UserManager userManager, EnviromentManager enviromentManager) {
         managerUser = userManager;
+        managerEnviroment = enviromentManager;
     }
 
     public void registerUserPage() {
@@ -112,6 +116,40 @@ public class UserPage {
         User user = users.get(id);
 
         managerUser.deleteUserController(user.getId());
+
+    }
+
+    public void acessUserEnviromentPage() {
+        Scanner input = new Scanner(System.in);
+        List<User> users = managerUser.listUserController();
+
+        int indice = 0;
+
+        System.out.println("Digite o indice do User que deseja dar acesso");
+        for (User user : users) {
+            System.out.println("-------------User [" + indice + "]-----------------");
+            print.printClass(user);
+            System.out.print("\n");
+            indice++;
+        }
+        int indiceUser = Integer.parseInt(input.nextLine());
+        User user = users.get(indiceUser);
+        List<Enviroments> enviroments = managerEnviroment.listEnviromentController();
+
+        indice = 0;
+
+        System.out.println("Digite o indice do Ambiente que dar acesso");
+        for (Enviroments enviroment : enviroments) {
+            System.out.println("-------------Ambiente [" + indice + "]-----------------");
+            print.printClass(enviroment);
+            System.out.print("\n");
+            indice++;
+        }
+        int indiceEnviroment = Integer.parseInt(input.nextLine());
+
+        Enviroments enviroment = enviroments.get(indiceEnviroment);
+
+        managerUser.acessUserEnviromentController(user.getId(), enviroment.getId());
 
     }
 

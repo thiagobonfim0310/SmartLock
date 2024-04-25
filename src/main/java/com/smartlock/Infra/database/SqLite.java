@@ -203,6 +203,39 @@ public class SqLite implements Database {
         return users;
     }
 
+    public User listUser(UUID idUser) {
+        User user = new User();
+        DataToJson format = new DataToJson();
+        String sql = "SELECT * FROM  users WHERE id = ?";
+
+        try (Connection conn = connect();
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, idUser.toString());
+            ResultSet rs = pstmt.executeQuery();
+
+            UUID id = UUID.fromString(rs.getString("id"));
+            String name = rs.getString("name");
+            String email = rs.getString("email");
+            String cpf = rs.getString("cpf");
+            List<String> type = format.deserializeTypes(rs.getString("type"));
+            List<Enviroments> perms = format.deserializeEnviroments(rs.getString("perms"));
+
+            user.setId(id);
+            user.setCpf(cpf);
+            user.setName(name);
+            user.setEmail(email);
+            user.setType(type);
+            user.setPerms(perms);
+
+        } catch (
+
+        SQLException e) {
+            System.out.println("Erro ao buscar usuários: " + e.getMessage());
+        }
+
+        return user;
+    }
+
     public void updateUsers(User user, UUID id) {
         DataToJson format = new DataToJson();
         String sql = "UPDATE users SET name = ?, email = ?, cpf = ?, perms = ? WHERE id = ?";
@@ -243,6 +276,34 @@ public class SqLite implements Database {
             }
         } catch (SQLException e) {
             System.out.println("Erro ao remover usuário: " + e.getMessage());
+        }
+    }
+
+    public void acessUserEnviroment(UUID idUser, UUID idEnviroment) {
+        User user = listUser(idUser);
+        Enviroments enviroment = listEnviroment(idEnviroment);
+        String sql = "INSERT INTO users_enviroments (userId, enviromentId) VALUES (?, ?)";
+        List<Enviroments> perms = new ArrayList<>();
+        for (Enviroments envi : user.getPerms()) {
+            perms.add(envi);
+        }
+        perms.add(enviroment);
+        user.setPerms(perms);
+        try (Connection conn = connect();
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, idUser.toString());
+            pstmt.setString(2, idEnviroment.toString());
+
+            int rowsAffected = pstmt.executeUpdate();
+            updateUsers(user, user.getId());
+            if (rowsAffected > 0) {
+                System.out.println("Usuario ganho acesso ao Ambiente.");
+            } else {
+                System.out.println("Erro ao tentar dar acesso.");
+            }
+        } catch (SQLException e) {
+            System.out.println("Erro ao atualizar usuário: " + e.getMessage());
         }
     }
 
@@ -306,6 +367,29 @@ public class SqLite implements Database {
         }
 
         return enviroments;
+    }
+
+    public Enviroments listEnviroment(UUID idEnviroment) {
+        Enviroments enviroment = new Enviroments();
+
+        String sql = "SELECT * FROM enviroments WHERE id = ?";
+
+        try (Connection conn = connect();
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, idEnviroment.toString());
+            ResultSet rs = pstmt.executeQuery();
+
+            UUID id = UUID.fromString(rs.getString("id"));
+            String name = rs.getString("name");
+
+            enviroment.setId(id);
+            enviroment.setName(name);
+
+        } catch (SQLException e) {
+            System.out.println("Erro ao buscar ambientes: " + e.getMessage());
+        }
+
+        return enviroment;
     }
 
     public void updateEnviroments(Enviroments enviroment, UUID id) {

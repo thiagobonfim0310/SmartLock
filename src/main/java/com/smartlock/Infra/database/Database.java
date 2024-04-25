@@ -19,6 +19,8 @@ public interface Database {
 
     public void deleteUser(UUID id);
 
+    public void acessUserEnviroment(UUID idUser, UUID idEnviroment);
+
     public boolean autenticarAdmin(String email, String password);
 
     public void saveLock(Lock Lock);

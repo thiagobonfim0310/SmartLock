@@ -6,6 +6,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
+import com.smartlock.Business.entities.Enviroments;
+
 /**
  * printEntities
  */
@@ -29,18 +31,14 @@ public class PrintEntities {
                         System.out.print("└─ ");
                     }
                     if (value instanceof Collection) {
-                        // Se for uma coleção, imprima cada elemento
                         System.out.println(attribute.getName() + ": ");
-                        printCollection((Collection<?>) value, depth + 1);
+                        printCollection((List<?>) value, depth + 1);
                     } else if (value instanceof UUID) {
-                        // Se for um UUID, imprima seu valor diretamente
                         System.out.println(attribute.getName() + ": " + value.toString());
                     } else if (!attribute.getType().isPrimitive() && !attribute.getType().equals(String.class)) {
-                        // Se não for primitivo nem String, chame recursivamente o método printObject
                         System.out.println(attribute.getName() + ": ");
                         printClass(value, depth + 1);
                     } else {
-                        // Para outros tipos de dados, imprima o nome do atributo e seu valor
                         System.out.println(attribute.getName() + ": " + value);
                     }
                 }
@@ -50,13 +48,17 @@ public class PrintEntities {
         }
     }
 
-    private void printCollection(Collection<?> collection, int depth) {
+    private void printCollection(List<?> collection, int depth) {
         for (Object element : collection) {
             if (depth > 0) {
                 System.out.print("    ".repeat(depth));
                 System.out.print("└─ ");
             }
-            System.out.println(element.toString());
+            if (element instanceof Enviroments) {
+                printClass(element, depth);
+            } else {
+                System.out.println(element.toString());
+            }
         }
     }
 

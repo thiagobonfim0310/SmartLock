@@ -63,6 +63,10 @@ public class Memory implements Database {
         }
     }
 
+    public void acessUserEnviroment(UUID idUser, UUID idEnviroment) {
+
+    }
+
     public void saveLock(Lock Lock) {
         locks.add(Lock);
     }

@@ -49,4 +49,8 @@ public class UserManager {
         data.deleteUser(id);
     }
 
+    public void acessUserEnviromentController(UUID idUser, UUID idEnviroment) {
+        data.acessUserEnviroment(idUser, idEnviroment);
+    }
+
 }
