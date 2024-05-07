@@ -1,22 +1,22 @@
 package com.smartlock;
 
-import com.smartlock.Business.Admin.AdminManager;
-import com.smartlock.Business.Enviroment.EnviromentManager;
-import com.smartlock.Business.Lock.LockManager;
-import com.smartlock.Business.User.UserManager;
-import com.smartlock.Business.adapters.ValidateEmailAdapter;
-import com.smartlock.Business.validators.ValidateEmail;
-import com.smartlock.Infra.database.Database;
-import com.smartlock.Infra.database.Memory;
-import com.smartlock.Infra.database.SqLite;
-import com.smartlock.View.LoginPage;
-import com.smartlock.View.StartUpPage;
-import com.smartlock.View.Enviroment.EnviromentMenu;
-import com.smartlock.View.Enviroment.EnviromentPage;
-import com.smartlock.View.Lock.LockMenu;
-import com.smartlock.View.Lock.LockPage;
-import com.smartlock.View.User.UserMenu;
-import com.smartlock.View.User.UserPage;
+import com.smartlock.business.adapters.ValidateEmailAdapter;
+import com.smartlock.business.admin.AdminManager;
+import com.smartlock.business.enviroment.EnviromentManager;
+import com.smartlock.business.lock.LockManager;
+import com.smartlock.business.user.UserManager;
+import com.smartlock.business.validators.ValidateEmail;
+import com.smartlock.infra.database.Database;
+import com.smartlock.infra.database.Memory;
+import com.smartlock.infra.database.SqLite;
+import com.smartlock.view.LoginPage;
+import com.smartlock.view.StartUpPage;
+import com.smartlock.view.enviroment.EnviromentMenu;
+import com.smartlock.view.enviroment.EnviromentPage;
+import com.smartlock.view.lock.LockMenu;
+import com.smartlock.view.lock.LockPage;
+import com.smartlock.view.user.UserMenu;
+import com.smartlock.view.user.UserPage;
 
 /**
  * Hello world!
