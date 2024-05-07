@@ -7,7 +7,7 @@ import java.util.UUID;
 import com.smartlock.Business.entities.Admin;
 import com.smartlock.Business.entities.Lock;
 import com.smartlock.Business.entities.User;
-import com.smartlock.Business.entities.Enviroments;;
+import com.smartlock.Business.entities.Enviroments;
 
 public interface Database {
 
