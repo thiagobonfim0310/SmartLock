@@ -20,7 +20,8 @@ public class LockMenu {
             System.out.println("[2] - Listar Tranca ");
             System.out.println("[3] - Atualizar Tranca ");
             System.out.println("[4] - Deletar Tranca ");
-            System.out.println("[5] - Voltar ");
+            System.out.println("[5] - Desfazer ultima alteração ");
+            System.out.println("[6] - Voltar ");
 
             Scanner input = new Scanner(System.in);
             option = input.nextInt();
@@ -38,6 +39,9 @@ public class LockMenu {
                     this.lockPage.deleteLockPage();
                     break;
                 case 5:
+                    this.lockPage.retoreBackupPage();
+                    break;
+                case 6:
                     return;
                 default:
                     break;

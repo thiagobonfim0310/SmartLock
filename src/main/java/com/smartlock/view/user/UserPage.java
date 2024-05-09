@@ -9,16 +9,16 @@ import com.smartlock.business.entities.User;
 import com.smartlock.business.enviroment.EnviromentManager;
 import com.smartlock.business.exceptions.EmailNotFoundException;
 import com.smartlock.business.user.UserFactory;
-import com.smartlock.business.user.UserManager;
+import com.smartlock.business.user.UserManagerFacede;
 import com.smartlock.view.util.PrintEntities;
 
 public class UserPage {
 
-    UserManager managerUser;
+    UserManagerFacede managerUser;
     EnviromentManager managerEnviroment;
     PrintEntities print = new PrintEntities();
 
-    public UserPage(UserManager userManager, EnviromentManager enviromentManager) {
+    public UserPage(UserManagerFacede userManager, EnviromentManager enviromentManager) {
         managerUser = userManager;
         managerEnviroment = enviromentManager;
     }
@@ -38,7 +38,6 @@ public class UserPage {
             case 2:
                 user = UserFactory.criarUsuario("aluno");
                 break;
-
             default:
                 user = UserFactory.criarUsuario("generico");
                 break;

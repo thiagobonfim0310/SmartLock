@@ -10,6 +10,15 @@ import java.util.ArrayList;
 public class LockManager {
     Database data;
 
+    private static LockManager instance;
+
+    public static LockManager getInstance(Database database) {
+        if (instance == null) {
+            instance = new LockManager(database);
+        }
+        return instance;
+    }
+
     public LockManager(Database database) {
         data = database;
     }
@@ -29,10 +38,13 @@ public class LockManager {
     }
 
     public void updateLockController(Lock lock, UUID id) {
+
         data.updateLock(lock, id);
+
     }
 
     public void deleteLockController(UUID id) {
         data.deleteLock(id);
     }
+
 }

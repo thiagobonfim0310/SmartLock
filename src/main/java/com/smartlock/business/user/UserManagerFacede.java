@@ -9,12 +9,21 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.UUID;
 
-public class UserManager {
-
+//Facade
+public class UserManagerFacede {
+    private static UserManagerFacede instance;
     private Database data;
     private ValidateEmail validEmail;
 
-    public UserManager(Database database, ValidateEmail validateEmail) {
+    public static UserManagerFacede getInstance(Database database, ValidateEmail validateEmail) {
+        if (instance == null) {
+            instance = new UserManagerFacede(database, validateEmail);
+        }
+
+        return instance;
+    }
+
+    public UserManagerFacede(Database database, ValidateEmail validateEmail) {
         this.data = database;
         this.validEmail = validateEmail;
     }

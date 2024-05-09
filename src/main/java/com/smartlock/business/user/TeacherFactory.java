@@ -1,10 +1,11 @@
 package com.smartlock.business.user;
 
 import com.smartlock.business.entities.Teacher;
+import com.smartlock.business.entities.User;
 
-public class TeacherFactory {
+public class TeacherFactory extends UserFactory {
 
-    static public Teacher criarUsuario() {
+    static public User criarUsuario() {
         return new Teacher();
     }
 

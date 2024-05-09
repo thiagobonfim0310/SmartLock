@@ -37,6 +37,7 @@ public class EnviromentPage {
         List<Enviroments> enviroments = manageEnviroment.listEnviromentController();
 
         for (Enviroments enviroment : enviroments) {
+
             System.out.print("------------------------------------ \n");
             print.printClass(enviroment);
             System.out.print("\n");

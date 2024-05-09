@@ -2,7 +2,6 @@ package com.smartlock.view;
 
 import java.util.Scanner;
 
-import com.smartlock.business.user.UserManager;
 import com.smartlock.view.enviroment.EnviromentMenu;
 import com.smartlock.view.lock.LockMenu;
 import com.smartlock.view.user.UserMenu;
