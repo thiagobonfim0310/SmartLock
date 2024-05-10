@@ -26,13 +26,13 @@ Senha: admin
 ## Padrões Implementados
 
 <ul>
-    <li>Singleton   (V)</li>
-    <li>Facade       (V)</li>
-    <li>Factory      (V)</li>
-    <li>Template Method (V)</li>
-    <li>Adapter</li>
-    <li>Commander  (V)</li>
-    <li>Memento (V)</li>
-    <li>Prototype (V)</li>
-    <li>Strategy (V)</li>
+    <li>Singleton   (<span style="color: #33FFFF;">■</span>) - Ciano</li>
+    <li>Facade       (<span style="color: #1BA1E2;">■</span>) - Azul Claro</li>
+    <li>Factory      (<span style="color: #F0A30A;">■</span>) - Laranja</li>
+    <li>Template Method (<span style="color: #1A3300;">■</span>) - Vermelho</li>
+    <li>Adapter     (<span style="color: #E51400;">■</span>) - Vermelho Claro</li>
+    <li>Commander   (<span style="color: #D80073;">■</span>) - Rosa</li>
+    <li>Memento     (<span style="color: #6A00FF;">■</span>) - Lilás</li>
+    <li>Prototype   (<span style="color: #A20025;">■</span>) - Vermelho Escuro</li>
+    <li>Strategy    (<span style="color: #60A917;">■</span>) - Verde Claro</li>
 </ul>
