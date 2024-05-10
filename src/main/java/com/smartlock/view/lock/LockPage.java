@@ -11,12 +11,12 @@ import com.smartlock.business.entities.User;
 import com.smartlock.business.enviroment.EnviromentManager;
 import com.smartlock.business.exceptions.EmailNotFoundException;
 import com.smartlock.business.lock.LockManager;
-import com.smartlock.business.user.UserManager;
 import com.smartlock.view.util.PrintEntities;;
 
 public class LockPage {
     LockManager managerLock;
     EnviromentManager manageEnviroment;
+    LockMemento lockMemento;
     PrintEntities print = new PrintEntities();
 
     public LockPage(LockManager lockManager, EnviromentManager enviromentManager) {
@@ -84,7 +84,7 @@ public class LockPage {
         int id = Integer.parseInt(input.nextLine());
 
         Lock lock = locks.get(id);
-
+        lockMemento = new LockMemento(lock, lock.getNumberOfSerie(), lock.getEnviroment(), lock.getProtocol());
         System.out.println("Comece a alteração :");
         System.out.print("Numero de serie antigo:" + lock.getNumberOfSerie() + "\n");
         lock.setNumerOfSerie(input.nextLine());
@@ -125,6 +125,18 @@ public class LockPage {
         Lock lock = locks.get(id);
 
         managerLock.deleteLockController(lock.getId());
+
+    }
+
+    // Memento
+    public void retoreBackupPage() {
+        System.out.println("Desfazendo ultima alteração");
+        if (lockMemento != null) {
+            lockMemento.retore();
+            managerLock.updateLockController(lockMemento.getLock(), lockMemento.getLock().getId());
+        } else {
+            System.out.println("Não há o que restaurar");
+        }
 
     }
 

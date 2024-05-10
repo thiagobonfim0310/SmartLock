@@ -2,14 +2,16 @@ package com.smartlock.view.enviroment;
 
 import java.util.Scanner;
 
-public class EnviromentMenu {
+import com.smartlock.view.StrategyMenu;
+
+public class EnviromentMenu implements StrategyMenu {
     EnviromentPage enviromentPage;
 
     public EnviromentMenu(EnviromentPage enviroment) {
         enviromentPage = enviroment;
     }
 
-    public void menu() {
+    public void execute() {
 
         int option;
         while (true) {

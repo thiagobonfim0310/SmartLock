@@ -17,3 +17,22 @@ Neste sistema, alguns padrões de qualidade de código devem ser seguidos:
     <li> Os nomes das variáveis devem ser significativos e curtos;</li>
     <li> Constantes devem ter todas as letras maiúsculas e as palavras devem estar separadas por <i>underscore</i>;</li>
 </ul>
+
+## Para teste
+
+Login: admin@admin.com
+Senha: admin
+
+## Padrões Implementados
+
+<ul>
+    <li>Singleton   (V)</li>
+    <li>Facade       (V)</li>
+    <li>Factory      (V)</li>
+    <li>Template Method (V)</li>
+    <li>Adapter</li>
+    <li>Commander  (V)</li>
+    <li>Memento (V)</li>
+    <li>Prototype (V)</li>
+    <li>Strategy (V)</li>
+</ul>

@@ -11,13 +11,22 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.UUID;
 
-public class UserManager {
-
-    private ImageAdapter imgAdapter;
+//Facade
+public class UserManagerFacede {
+    private static UserManagerFacede instance;
     private Database data;
     private ValidateEmail validEmail;
+    private ImageAdapter imgAdapter;
 
-    public UserManager(Database database, ValidateEmail validateEmail, ImageAdapter imgAdapter) {
+    public static UserManagerFacede getInstance(Database database, ValidateEmail validateEmail, ImageAdapter imgAdapter) {
+        if (instance == null) {
+            instance = new UserManagerFacede(database, validateEmail, imgAdapter);
+        }
+
+        return instance;
+    }
+
+    public UserManagerFacede(Database database, ValidateEmail validateEmail, ImageAdapter imgAdapter) {
         this.data = database;
         this.validEmail = validateEmail;
         this.imgAdapter = imgAdapter;

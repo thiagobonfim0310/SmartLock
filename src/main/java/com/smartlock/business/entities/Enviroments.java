@@ -3,19 +3,22 @@ package com.smartlock.business.entities;
 import java.util.UUID;
 import java.util.List;
 
-public class Enviroments {
+public class Enviroments extends EnviromentsPrototype {
 
-    private UUID id;
     private String name;
     private List<Enviroments> enviroments;
     private List<Lock> locks;
 
-    public List<Enviroments> getEnviroments() {
-        return enviroments;
+    public Enviroments() {
+
     }
 
-    public UUID getId() {
-        return id;
+    public Enviroments(Enviroments enviroments) {
+        super(enviroments);
+    }
+
+    public List<Enviroments> getEnviroments() {
+        return enviroments;
     }
 
     public List<Lock> getLocks() {
@@ -30,15 +33,16 @@ public class Enviroments {
         this.enviroments = enviroments;
     }
 
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
     public void setLocks(List<Lock> locks) {
         this.locks = locks;
     }
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public EnviromentsPrototype clone() {
+        return new Enviroments(this);
     }
 }
