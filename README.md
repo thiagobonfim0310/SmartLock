@@ -26,13 +26,13 @@ Senha: admin
 ## Padrões Implementados
 
 <ul>
-    <li>Singleton   (V)</li>
-    <li>Facade       (V)</li>
-    <li>Factory      (V)</li>
-    <li>Template Method</li>
-    <li>Adapter</li>
-    <li>Commander  (V)</li>
-    <li>Memento (V)</li>
-    <li>Prototype (V)</li>
-    <li>Strategy (V)</li>
+    <li>Singleton   (<span style="color: #33FFFF;">■</span>)</li>
+    <li>Facade       (<span style="color: #1BA1E2;">■</span>)</li>
+    <li>Factory      (<span style="color: #F0A30A;">■</span>)</li>
+    <li>Template Method (<span style="color: #1A3300;">■</span>)</li>
+    <li>Adapter     (<span style="color: #E51400;">■</span>)</li>
+    <li>Commander   (<span style="color: #D80073;">■</span>)</li>
+    <li>Memento     (<span style="color: #6A00FF;">■</span>)</li>
+    <li>Prototype   (<span style="color: #A20025;">■</span>)</li>
+    <li>Strategy    (<span style="color: #60A917;">■</span>)</li>
 </ul>
