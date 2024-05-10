@@ -10,6 +10,7 @@ public class User {
     private String name;
     private String email;
     private String cpf;
+    private String profileImage;
     private List<String> type;
     private List<Enviroments> perms;
 
@@ -45,6 +46,10 @@ public class User {
         return name;
     }
 
+    public String getProfileImage() {
+        return profileImage;
+    }
+
     public List<String> getType() {
         return type;
     }
@@ -71,6 +76,10 @@ public class User {
 
     public void setId(UUID id) {
         this.id = id;
+    }
+
+    public void setProfileImage(String profileImage) {
+        this.profileImage = profileImage;
     }
 
 }

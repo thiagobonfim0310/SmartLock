@@ -1,11 +1,13 @@
 package com.smartlock;
 
-import com.smartlock.business.adapters.ValidateEmailAdapter;
 import com.smartlock.business.admin.AdminManager;
 import com.smartlock.business.enviroment.EnviromentManager;
 import com.smartlock.business.lock.LockManager;
 import com.smartlock.business.user.UserManagerFacede;
 import com.smartlock.business.validators.ValidateEmail;
+import com.smartlock.business.adapters.Images.ImageAdapter;
+import com.smartlock.business.adapters.Images.PNGImageAdapter;
+import com.smartlock.business.processors.PNGImageProcessor;
 import com.smartlock.business.reports.ReportTXT;
 import com.smartlock.business.reports.ReportTemplate;
 
@@ -35,9 +37,11 @@ public class App {
     public static void main(String[] args) {
         Database database = new SqLite();
         // Managers
-        ValidateEmail validateEmail = new ValidateEmailAdapter();
+        PNGImageProcessor pngProcessor = new PNGImageProcessor();
+        ImageAdapter pngAdapter = new PNGImageAdapter(pngProcessor);
+        ValidateEmail validateEmail = new ValidateEmail();
         AdminManager adminManager = new AdminManager(database);
-        UserManagerFacede userManager = UserManagerFacede.getInstance(database, validateEmail);
+        UserManagerFacede userManager = UserManagerFacede.getInstance(database, validateEmail, pngAdapter);
         LockManager lockManager = LockManager.getInstance(database); // Singleton
         EnviromentManager enviromentManager = new EnviromentManager(database);
         ReportTemplate reportManager = new ReportTXT(database);

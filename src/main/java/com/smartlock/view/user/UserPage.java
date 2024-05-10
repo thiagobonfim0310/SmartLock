@@ -48,9 +48,11 @@ public class UserPage {
         user.setEmail(input.nextLine());
         System.out.print("Cpf: \n");
         user.setCpf(input.nextLine());
+        System.out.print("Foto de perfil: \n");
+        user.setProfileImage(input.nextLine());
         // TO-DO : Adicionar o cadastro de tipo
         try {
-            managerUser.registerUserController(user);
+            managerUser.registerUserController(user, user.getProfileImage());
         } catch (EmailNotFoundException e) {
             System.out.println("Email inválido");
         }

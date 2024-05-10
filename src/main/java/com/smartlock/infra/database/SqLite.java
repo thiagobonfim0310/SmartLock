@@ -61,6 +61,7 @@ public class SqLite implements Database {
                     "name TEXT NOT NULL," +
                     "email TEXT," +
                     "cpf TEXT," +
+                    "profileImage TEXT," +
                     "type TEXT," +
                     "perms TEXT)";
             stmt.execute(sqlCreateUsersTable);
