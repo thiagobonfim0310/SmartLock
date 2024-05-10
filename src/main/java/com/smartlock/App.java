@@ -5,9 +5,14 @@ import com.smartlock.business.enviroment.EnviromentManager;
 import com.smartlock.business.lock.LockManager;
 import com.smartlock.business.user.UserManager;
 import com.smartlock.business.validators.ValidateEmail;
+import com.smartlock.business.adapters.Images.ImageAdapter;
+import com.smartlock.business.adapters.Images.PNGImageAdapter;
+import com.smartlock.business.processors.PNGImageProcessor;
+
 import com.smartlock.infra.database.Database;
 import com.smartlock.infra.database.Memory;
 import com.smartlock.infra.database.SqLite;
+
 import com.smartlock.view.LoginPage;
 import com.smartlock.view.StartUpPage;
 import com.smartlock.view.enviroment.EnviromentMenu;
@@ -25,9 +30,11 @@ public class App {
     public static void main(String[] args) {
         Database database = new SqLite();
         // Managers
+        PNGImageProcessor pngProcessor = new PNGImageProcessor();
+        ImageAdapter pngAdapter = new PNGImageAdapter(pngProcessor);
         ValidateEmail validateEmail = new ValidateEmail();
         AdminManager adminManager = new AdminManager(database);
-        UserManager userManager = new UserManager(database, validateEmail);
+        UserManager userManager = new UserManager(database, validateEmail, pngAdapter);
         LockManager lockManager = new LockManager(database);
         EnviromentManager enviromentManager = new EnviromentManager(database);
         // Pages

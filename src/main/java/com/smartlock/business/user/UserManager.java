@@ -1,6 +1,6 @@
 package com.smartlock.business.user;
 
-import com.smartlock.business.adapters.ImageAdapter;
+import com.smartlock.business.adapters.Images.ImageAdapter;
 import com.smartlock.business.entities.User;
 import com.smartlock.business.exceptions.EmailNotFoundException;
 import com.smartlock.business.validators.ValidateEmail;

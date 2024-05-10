@@ -1,6 +1,5 @@
 package com.smartlock.business.adapters.Images;
 
-import com.smartlock.business.adapters.ImageAdapter;
 import com.smartlock.business.processors.PNGImageProcessor;
 
 public class PNGImageAdapter implements ImageAdapter {
@@ -8,7 +7,7 @@ public class PNGImageAdapter implements ImageAdapter {
     private PNGImageProcessor pngProcessor;
 
     public PNGImageAdapter(PNGImageProcessor pngImageProcessor) {
-        this.pngProcessor = pngProcessor;
+        this.pngProcessor = pngImageProcessor;
     }
 
     @Override

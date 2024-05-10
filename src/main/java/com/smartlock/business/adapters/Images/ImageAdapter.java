@@ -1,4 +1,4 @@
-package com.smartlock.business.adapters;
+package com.smartlock.business.adapters.Images;
 
 public interface ImageAdapter {
 
