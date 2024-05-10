@@ -17,7 +17,8 @@ public class StartUpPage {
     ContextStrategyMenu context;
     ReportMenu reportMenu;
 
-    public StartUpPage(UserMenu user, LockMenu lock, EnviromentMenu enviroment, ContextStrategyMenu context, ReportMenu report) {
+    public StartUpPage(UserMenu user, LockMenu lock, EnviromentMenu enviroment, ContextStrategyMenu context,
+            ReportMenu report) {
         this.context = context;
         this.userMenu = user;
         this.lockMenu = lock;
@@ -49,7 +50,7 @@ public class StartUpPage {
                     context.setStrategy(lockMenu);
                     break;
                 case 4:
-                    this.reportMenu.menu();
+                    context.setStrategy(reportMenu);
                     break;
 
                 default:
