@@ -50,31 +50,4 @@ public class ReportTXT extends ReportTemplate {
         System.out.println("Relatório em formato (.txt)");
     }
 
-    @Override
-    protected void generateFile() {
-        String fileName = "Relatorio_" + LocalDate.now() + ".txt";
-        try (FileWriter writer = new FileWriter(fileName)) {
-            writer.write("== Relatório ==\n");
-            writer.write("Data de Geração: " + LocalDate.now() + "\n");
-
-            for (Enviroments enviroment : enviroments) {
-                writer.write("Ambiente " + enviroment.getName() + "\n");
-                writer.write("Trancas\n");
-                
-                for (Lock lock : enviroment.getLocks()) {
-                    writer.write("- " + lock.getId().toString() + "\n");
-                }
-                writer.write("\n");
-            }
-
-            writer.write("== SmartLock ==\n");
-            writer.write("Relatório em formato (.txt)\n");
-            writer.write("\n");
-            
-            System.out.println("Relatório exportado com sucesso para o arquivo: " + fileName);
-        } catch (IOException e) {
-            System.err.println("Erro ao exportar relatório para o arquivo: " + fileName);
-            e.printStackTrace();
-        }
-    }
 }

@@ -7,13 +7,11 @@ public abstract class ReportTemplate {
         generateHeader();
         generateBody();
         generateFooter();
-        generateFile();
     }
 
     protected abstract void generateHeader();
     protected abstract void generateBody();
     protected abstract void generateFooter();
-    protected abstract void generateFile();
     
     
 }
