@@ -4,15 +4,17 @@ import java.util.Scanner;
 
 import javax.sound.midi.SysexMessage;
 
-public class ReportMenu {
+import com.smartlock.view.StrategyMenu;
+
+public class ReportMenu implements StrategyMenu {
     ReportPage reportPage;
 
     public ReportMenu(ReportPage report) {
         reportPage = report;
     }
 
-    public void menu() {
-        
+    public void execute() {
+
         int option;
         while (true) {
             System.out.println("Selecione a opção de relatório que deseja gerar");
@@ -26,7 +28,7 @@ public class ReportMenu {
                     break;
                 case 2:
                     return;
-            
+
                 default:
                     break;
             }
