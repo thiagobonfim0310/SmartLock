@@ -15,6 +15,7 @@ import com.smartlock.view.enviroment.EnviromentMenu;
 import com.smartlock.view.enviroment.EnviromentPage;
 import com.smartlock.view.lock.LockMenu;
 import com.smartlock.view.lock.LockPage;
+import com.smartlock.view.user.Command;
 import com.smartlock.view.user.LoginCommand;
 import com.smartlock.view.user.LoginPage;
 import com.smartlock.view.user.UserMenu;
@@ -45,7 +46,7 @@ public class App {
         LoginPage loginPage = new LoginPage();
         StartUpPage menu = new StartUpPage(userMenu, lockMenu, enviromentMenu, context);
 
-        LoginCommand login = new LoginCommand(loginPage, adminManager, menu);
+        Command login = new LoginCommand(loginPage, adminManager, menu);
 
         login.execute();
     }
