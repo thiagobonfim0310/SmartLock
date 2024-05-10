@@ -2,14 +2,16 @@ package com.smartlock.view.user;
 
 import java.util.Scanner;
 
-public class UserMenu {
+import com.smartlock.view.StrategyMenu;
+
+public class UserMenu implements StrategyMenu {
     UserPage userPage;
 
     public UserMenu(UserPage user) {
         userPage = user;
     }
 
-    public void menu() {
+    public void execute() {
 
         int option;
         while (true) {

@@ -9,6 +9,7 @@ import com.smartlock.business.validators.ValidateEmail;
 import com.smartlock.infra.database.Database;
 import com.smartlock.infra.database.Memory;
 import com.smartlock.infra.database.SqLite;
+import com.smartlock.view.ContextStrategyMenu;
 import com.smartlock.view.StartUpPage;
 import com.smartlock.view.enviroment.EnviromentMenu;
 import com.smartlock.view.enviroment.EnviromentPage;
@@ -37,11 +38,12 @@ public class App {
         LockPage lockPage = new LockPage(lockManager, enviromentManager);
         EnviromentPage enviromentPage = new EnviromentPage(enviromentManager);
         // Menu
+        ContextStrategyMenu context = new ContextStrategyMenu();
         UserMenu userMenu = new UserMenu(userPage);
         LockMenu lockMenu = new LockMenu(lockPage);
         EnviromentMenu enviromentMenu = new EnviromentMenu(enviromentPage);
         LoginPage loginPage = new LoginPage();
-        StartUpPage menu = new StartUpPage(userMenu, lockMenu, enviromentMenu);
+        StartUpPage menu = new StartUpPage(userMenu, lockMenu, enviromentMenu, context);
 
         LoginCommand login = new LoginCommand(loginPage, adminManager, menu);
 
