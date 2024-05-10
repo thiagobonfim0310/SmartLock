@@ -29,7 +29,7 @@ Senha: admin
     <li>Singleton   (V)</li>
     <li>Facade       (V)</li>
     <li>Factory      (V)</li>
-    <li>Template Method</li>
+    <li>Template Method (V)</li>
     <li>Adapter</li>
     <li>Commander  (V)</li>
     <li>Memento (V)</li>
