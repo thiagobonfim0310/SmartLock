@@ -1,6 +1,5 @@
 package com.smartlock;
 
-import com.smartlock.business.adapters.ValidateEmailAdapter;
 import com.smartlock.business.admin.AdminManager;
 import com.smartlock.business.enviroment.EnviromentManager;
 import com.smartlock.business.lock.LockManager;
@@ -26,7 +25,7 @@ public class App {
     public static void main(String[] args) {
         Database database = new SqLite();
         // Managers
-        ValidateEmail validateEmail = new ValidateEmailAdapter();
+        ValidateEmail validateEmail = new ValidateEmail();
         AdminManager adminManager = new AdminManager(database);
         UserManager userManager = new UserManager(database, validateEmail);
         LockManager lockManager = new LockManager(database);

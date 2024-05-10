@@ -1,6 +1,18 @@
 package com.smartlock.business.validators;
 
-public interface ValidateEmail {
+import org.apache.commons.validator.routines.EmailValidator;
 
-    boolean isValidEmail(String email);
+import com.smartlock.business.entities.User;
+
+public class ValidateEmail{
+
+    private EmailValidator emailValidator;
+
+    public ValidateEmail() {
+        this.emailValidator = EmailValidator.getInstance();
+    }
+
+    public boolean isValidEmail(User user) {
+        return emailValidator.isValid(user.getEmail());
+    }
 }
