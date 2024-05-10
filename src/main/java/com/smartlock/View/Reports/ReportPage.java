@@ -4,27 +4,21 @@ import java.util.Scanner;
 import java.util.UUID;
 import java.util.List;
 
-import com.smartlock.Business.reports.ReportManager;
-import com.smartlock.Business.entities.Report;
+import com.smartlock.Business.reports.ReportTemplate;
 import com.smartlock.View.util.PrintEntities;
 
 public class ReportPage {
     
-    ReportManager manageReport;
+    ReportTemplate manageReport;
     PrintEntities print = new PrintEntities();
 
-    public ReportPage(ReportManager reportManager) {
+    public ReportPage(ReportTemplate reportManager) {
         manageReport = reportManager;
     }
 
-    public void issueReportPDF() {
-        System.out.println("Gerando relatório em PDF");
-        manageReport.generateReportPDF();
-    }
-
     public void issueReportTXT() {
-        System.out.println("Gerando relatṕrio em TXT");
-        manageReport.generateReportTXT();
+        System.out.println("Gerando relatório em TXT");
+        manageReport.generateReport();
     }
 
 }

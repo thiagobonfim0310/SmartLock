@@ -6,7 +6,8 @@ import com.smartlock.Business.Lock.LockManager;
 import com.smartlock.Business.User.UserManager;
 import com.smartlock.Business.adapters.ValidateEmailAdapter;
 import com.smartlock.Business.validators.ValidateEmail;
-import com.smartlock.Business.reports.ReportManager;
+import com.smartlock.Business.reports.ReportTXT;
+import com.smartlock.Business.reports.ReportTemplate;
 
 import com.smartlock.Infra.database.Database;
 import com.smartlock.Infra.database.Memory;
@@ -36,7 +37,7 @@ public class App {
         UserManager userManager = new UserManager(database, validateEmail);
         LockManager lockManager = new LockManager(database);
         EnviromentManager enviromentManager = new EnviromentManager(database);
-        ReportManager reportManager = new ReportManager();
+        ReportTemplate reportManager = new ReportTXT(database);
         // Pages
         UserPage userPage = new UserPage(userManager);
         LockPage lockPage = new LockPage(lockManager, enviromentManager);
